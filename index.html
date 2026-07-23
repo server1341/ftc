@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTC - Case Verification Portal</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background:#f3f5f8;
+    min-height:100vh;
+}
+
+.demo-banner{
+    background:#8b0000;
+    color:#fff;
+    text-align:center;
+    padding:12px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+header{
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.header-inner{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+    background:white;
+    border-radius:12px;
+    padding:5px;
+}
+
+.agency-title{
+    font-size:30px;
+    font-weight:700;
+}
+
+.agency-sub{
+    opacity:.85;
+    margin-top:5px;
+}
+
+.container{
+    max-width:800px;
+    margin:40px auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.question{
+    font-size:22px;
+    font-weight:600;
+    margin-bottom:30px;
+    color:#1e293b;
+}
+
+.btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    margin-top:15px;
+    font-size:16px;
+    font-weight:600;
+}
+
+.primary{
+    background:#0f172a;
+    color:white;
+}
+
+.secondary{
+    background:#dbeafe;
+    color:#0f172a;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    margin-top:10px;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+.hidden{
+    display:none;
+}
+
+.loading-box{
+    text-align:center;
+}
+
+.spinner{
+    width:80px;
+    height:80px;
+    border:8px solid #ddd;
+    border-top:8px solid #1d4ed8;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:auto;
+}
+
+@keyframes spin{
+    100%{transform:rotate(360deg);}
+}
+
+#countdown{
+    font-size:28px;
+    font-weight:700;
+    margin-top:20px;
+}
+
+.profile{
+    text-align:center;
+}
+
+.profile img.profile-pic{
+    width:140px;
+    height:140px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid #e2e8f0;
+}
+
+.name{
+    font-size:30px;
+    font-weight:700;
+    margin-top:15px;
+}
+
+.badge{
+    color:#475569;
+    margin-top:8px;
+    font-size:18px;
+}
+
+.notice{
+    margin-top:25px;
+    background:#eff6ff;
+    border-left:5px solid #2563eb;
+    padding:20px;
+    text-align:left;
+    line-height:1.7;
+}
+
+.signature{
+    margin-top:30px;
+    max-width:220px;
+}
+
+.footer-note{
+    margin-top:25px;
+    color:#b91c1c;
+    font-weight:700;
+}
+</style>
+</head>
+<body>
+
+</div>
+
+<header>
+<div class="header-inner">
+<img src="125.png" class="logo">
+<div>
+<div class="agency-title">FTC</div>
+<div class="agency-sub">
+Federal Trade Commission
+</div>
+</div>
+</div>
+</header>
+
+<div class="container">
+
+<div class="card" id="step1">
+<div class="question">
+Was your case registered directly with FTC, or forwarded through another organization?
+</div>
+
+<button class="btn primary">
+Registered Directly With FTC
+</button>
+
+<button class="btn secondary" onclick="showCompany()">
+Forwarded By Another Organization
+</button>
+</div>
+
+<div class="card hidden" id="step2">
+<h2>Organization Information</h2>
+
+<label>Organization Name</label>
+<input type="text" id="companyName" placeholder="Enter organization name">
+
+<button class="btn primary" onclick="nextCase()">
+Continue
+</button>
+</div>
+
+<div class="card hidden" id="step3">
+<div style="text-align:center;">
+<img src="logo.WEBP" style="width:120px;">
+</div>
+
+<h2 style="margin-top:20px;">Case Verification</h2>
+
+<input type="text" id="caseid" placeholder="Enter Case ID">
+
+<button class="btn primary" onclick="verifyCase()">
+Verify Case
+</button>
+</div>
+
+<div class="card hidden" id="loadingPage">
+<div class="loading-box">
+<div class="spinner"></div>
+<h2 style="margin-top:20px;">Verification In Progress</h2>
+<p>Please wait while records are reviewed.</p>
+<div id="countdown">30</div>
+</div>
+</div>
+
+<div class="card hidden" id="resultPage">
+
+<div class="profile">
+
+<img src="IMG_8082.jpeg" class="profile-pic">
+
+<div class="name">Eric C Monti</div>
+
+<div class="badge">
+Badge ID: EMC1978FTC
+</div>
+
+<div class="notice">
+Case ID <b>997204</b> has been assigned to
+<b>Eric C. Monti
+</div>
+
+<img src="IMG_8083.jpeg" class="signature">
+
+<div class="footer-note">
+LEGAL  RECORD ONLY •  AN OFFICIAL ASSIGNMENT DOCUMENT
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function showCompany(){
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("step2").classList.remove("hidden");
+}
+
+function nextCase(){
+
+    let company=document.getElementById("companyName").value;
+
+    if(company.trim()==""){
+        alert("Please enter organization name.");
+        return;
+    }
+
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("step3").classList.remove("hidden");
+}
+
+function verifyCase(){
+
+    let id=document.getElementById("caseid").value;
+
+    if(id!="997204"){
+        alert(" Case ID not found.");
+        return;
+    }
+
+    document.getElementById("step3").classList.add("hidden");
+    document.getElementById("loadingPage").classList.remove("hidden");
+
+    let sec=30;
+
+    let timer=setInterval(function(){
+
+        sec--;
+
+        document.getElementById("countdown").innerText=sec;
+
+        if(sec<=0){
+
+            clearInterval(timer);
+
+            document.getElementById("loadingPage").classList.add("hidden");
+            document.getElementById("resultPage").classList.remove("hidden");
+
+        }
+
+    },1000);
+
+}
+
+</script>
+
+</body>
+</html>
